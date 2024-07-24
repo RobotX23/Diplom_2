@@ -35,3 +35,7 @@ def old_user():
     response = requests.post(f"{url}{register}", json=returne)
     return response.status_code
 
+def old_user_1():
+    returne = Old_user_1
+    response = requests.post(f"{url}{register}", json=returne)
+    return response.status_code

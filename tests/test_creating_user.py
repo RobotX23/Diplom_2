@@ -10,8 +10,9 @@ class TestUser:
         response = requests.post(f"{url}{register}", json=returne)
         assert response.status_code == 200 and response.json()["success"] is True
         del returne["name"]
-        requests.post(f"{url}{authorization}", json=returne)
-        requests.delete(f"{url}{deleted}")
+        b = requests.post(f"{url}{authorization}", json=returne)
+        token_1 = {'Authorization': b.json()["accessToken"]}
+        requests.delete(f"{url}{deleted}", headers=token_1)
 
 
     #Проверка создания существующего пользователя
@@ -21,8 +22,9 @@ class TestUser:
         old_user()
         response = requests.post(f"{url}{register}", json=returne)
         assert response.json()["message"] == "User already exists" and response.json()["success"] is False
-        requests.post(f"{url}{authorization}", json=returne_1)
-        requests.delete(f"{url}{deleted}")
+        b = requests.post(f"{url}{authorization}", json=returne_1)
+        token_1 = {'Authorization': b.json()["accessToken"]}
+        requests.delete(f"{url}{deleted}", headers=token_1)
 
     #Проверка создания пользователя без имени
     def test_creating_user_no_name(self):
@@ -45,3 +47,6 @@ class TestUser:
         del returne["email"]
         response = requests.post(f"{url}{register}", json=returne)
         assert response.json()["message"] == "Email, password and name are required fields" and response.json()["success"] is False
+
+a = TestUser()
+a.test_creating_user()

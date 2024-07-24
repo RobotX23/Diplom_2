@@ -10,8 +10,9 @@ class TestAuthorization:
         returne = Old_user_avt
         old_user()
         response = requests.post(f"{url}{authorization}", json=returne)
-        assert response.status_code == 200 and response.json()["success"] is True and response.json()["user"]["email"] == "tes123335t-data@yandex.ru" and response.json()["user"]["name"] == "Lol134123"
-        requests.delete(f"{url}{deleted}")
+        assert response.status_code == 200 and response.json()["success"] is True and response.json()["user"]["email"] == "tes1233335t-data@yandex.ru" and response.json()["user"]["name"] == "Lol134123"
+        token_1 = {'Authorization': response.json()["accessToken"]}
+        requests.delete(f"{url}{deleted}", headers=token_1)
 
     #Проверка авторизации с неверным почтой
     def test_authorization_no_email(self):
@@ -20,8 +21,9 @@ class TestAuthorization:
         old_user()
         response = requests.post(f"{url}{authorization}", json=returne)
         assert response.status_code == 401 and response.json()["success"] is False and response.json()["message"] == 'email or password are incorrect'
-        requests.post(f"{url}{authorization}", json=return_1)
-        requests.delete(f"{url}{deleted}")
+        b = requests.post(f"{url}{authorization}", json=return_1)
+        token_1 = {'Authorization': b.json()["accessToken"]}
+        requests.delete(f"{url}{deleted}", headers=token_1)
 
     #Проверка авторизации с неверным паролем
     def test_authorization_no_password(self):
@@ -30,5 +32,7 @@ class TestAuthorization:
         old_user()
         response = requests.post(f"{url}{authorization}", json=returne)
         assert response.status_code == 401 and response.json()["success"] is False and response.json()["message"] == 'email or password are incorrect'
-        requests.post(f"{url}{authorization}", json=return_1)
-        requests.delete(f"{url}{deleted}")
+        b = requests.post(f"{url}{authorization}", json=return_1)
+        token_1 = {'Authorization': b.json()["accessToken"]}
+        requests.delete(f"{url}{deleted}", headers=token_1)
+
