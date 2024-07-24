@@ -1,11 +1,13 @@
 from helpers import *
 import requests
 from data import *
+import allure
 
 
 class TestAuthorization:
 
     #Проверка авторизации
+    @allure.title('Проверка авторизации')
     def test_authorization(self):
         returne = Old_user_avt
         old_user()
@@ -14,7 +16,8 @@ class TestAuthorization:
         token_1 = {'Authorization': response.json()["accessToken"]}
         requests.delete(f"{url}{deleted}", headers=token_1)
 
-    #Проверка авторизации с неверным почтой
+    #Проверка авторизации с неверной почтой
+    @allure.title('Проверка авторизации с неверной почтой')
     def test_authorization_no_email(self):
         return_1 = Old_user_avt
         returne = Old_user_avt_no_email
@@ -26,6 +29,7 @@ class TestAuthorization:
         requests.delete(f"{url}{deleted}", headers=token_1)
 
     #Проверка авторизации с неверным паролем
+    @allure.title('Проверка авторизации с неверным паролем')
     def test_authorization_no_password(self):
         return_1 = Old_user_avt
         returne = Old_user_avt_no_password
