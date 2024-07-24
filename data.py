@@ -2,6 +2,12 @@ url = 'https://stellarburgers.nomoreparties.site/api'
 register = '/auth/register'
 authorization = '/auth/login'
 deleted = '/auth/user'
+Orders = '/orders'
+Ingredient = {
+        "ingredients": ["61c0c5a71d1f82001bdaaa72", "61c0c5a71d1f82001bdaaa6f"]}
+
+No_hesh_ngredient = {
+        "ingredients": ["61c0c5a71d1f82s001baaa72", "61c0c5a71d1f82a001daaa6f"]}
 
 New_user = {
 "email": "tes12333vvbnv5t-data@yandex.ru",
