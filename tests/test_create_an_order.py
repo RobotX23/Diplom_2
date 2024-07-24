@@ -17,6 +17,7 @@ class TestCreateAnOrder:
         requests.delete(f"{url}{deleted}", headers=token_1)
 
     #Проверка создание заказа не авторизованным пользователем
+    #Не корректная обработка сервером
     def test_no_avt(self):
         r = requests.post(f"{url}{Orders}",  data=Ingredient)
         assert r.json()["success"] is True
