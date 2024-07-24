@@ -1,5 +1,7 @@
 import random
 import string
+import requests
+from data import *
 
 log3 = []
 
@@ -28,5 +30,8 @@ def new_user():
     return payload
 
 
-
+def old_user():
+    returne = Old_user
+    response = requests.post(f"{url}{register}", json=returne)
+    return response.status_code
 
