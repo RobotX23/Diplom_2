@@ -9,6 +9,7 @@ class TestUser:
         returne = new_user()
         response = requests.post(f"{url}{register}", json=returne)
         assert response.status_code == 200 and response.json()["success"] is True
+        del returne["name"]
         requests.post(f"{url}{authorization}", json=returne)
         requests.delete(f"{url}{deleted}")
 
@@ -16,10 +17,11 @@ class TestUser:
     #Проверка создания существующего пользователя
     def test_creating_user_old(self):
         returne = Old_user
+        returne_1 = Old_user_avt
         old_user()
         response = requests.post(f"{url}{register}", json=returne)
         assert response.json()["message"] == "User already exists" and response.json()["success"] is False
-        requests.post(f"{url}{authorization}", json=returne)
+        requests.post(f"{url}{authorization}", json=returne_1)
         requests.delete(f"{url}{deleted}")
 
     #Проверка создания пользователя без имени
